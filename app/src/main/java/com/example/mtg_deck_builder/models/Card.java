@@ -15,6 +15,22 @@ public class Card {
     private List<String> colourIdentity;
     private Images images;
 
+    public Card(String id, String name, String typeLine, String oracleText, Legalities legalities,
+                String manaCost, int cmc, String power, String toughness, List<String> colourIdentity,
+                Images images) {
+        this.id = id;
+        this.name = name;
+        this.typeLine = typeLine;
+        this.oracleText = oracleText;
+        this.legalities = legalities;
+        this.manaCost = manaCost;
+        this.cmc = cmc;
+        this.power = power;
+        this.toughness = toughness;
+        this.colourIdentity = colourIdentity;
+        this.images = images;
+    }
+
     public String getId() {
         return id;
     }
