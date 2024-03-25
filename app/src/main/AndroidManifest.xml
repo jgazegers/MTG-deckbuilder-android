@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MTGdeckbuilder"
         tools:targetApi="31">
         <activity
+            android:name=".DeckCardDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".DeckViewActivity"
             android:exported="false" />
         <activity

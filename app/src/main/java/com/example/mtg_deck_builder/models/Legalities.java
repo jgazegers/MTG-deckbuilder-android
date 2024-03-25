@@ -22,6 +22,4 @@ public class Legalities {
     private String oldschool;
     private String premodern;
     private String predh;
-
-    // Getters and setters for each field
 }

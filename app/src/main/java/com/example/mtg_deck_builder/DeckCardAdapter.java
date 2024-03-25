@@ -1,5 +1,6 @@
 package com.example.mtg_deck_builder;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class DeckCardAdapter extends RecyclerView.Adapter<DeckCardAdapter.DeckCa
             cardQuantity = itemView.findViewById(R.id.card_quantity);
             cardComment = itemView.findViewById(R.id.card_comment);
         }
+
     }
 
     @NonNull
@@ -48,6 +50,7 @@ public class DeckCardAdapter extends RecyclerView.Adapter<DeckCardAdapter.DeckCa
     public void onBindViewHolder(@NonNull DeckCardViewHolder holder, int position) {
         DeckCard currentDeckCard = deckCardList.get(position);
         Card card = currentDeckCard.getCard();
+
         //holder.cardImage.setImageResource(card.getImages().getSmall());
         holder.cardName.setText(card.getName());
         holder.cardQuantity.setText("Quantity: " + currentDeckCard.getAmount());

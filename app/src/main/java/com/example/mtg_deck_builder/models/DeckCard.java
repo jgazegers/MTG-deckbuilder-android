@@ -33,14 +33,20 @@ public class DeckCard {
         return comment;
     }
 
+    public void setComment(String newComment) {
+        this.comment = newComment;
+    }
+
+    public void setAmount(int newAmount) {
+        this.amount = newAmount;
+    }
+
     public static List<DeckCard> getTestData() {
         List<DeckCard> deckCards = new ArrayList<DeckCard>();
 
-        Card card1 = new Card("123", "Lightning Bolt", "Instant", "Deal 3 damage to any target.",
-                new Legalities(), "{R}", 1, null, null, null, new Images());
+        Card card1 = getTestCard1();
 
-        Card card2 = new Card("321", "fire Bolt", "Instant", "Deal 3 damage to any target.",
-                new Legalities(), "{R}", 1, null, null, null, new Images());
+        Card card2 = getTestCard2();
 
         deckCards.add(new DeckCard(UUID.randomUUID(), card1, 2, "comment 1"));
         deckCards.add(new DeckCard(UUID.randomUUID(), card2, 3, "comment 2"));
@@ -54,5 +60,29 @@ public class DeckCard {
         deckCards.add(new DeckCard(UUID.randomUUID(), card2, 3, "comment 2"));
 
         return deckCards;
+    }
+
+    public static Card getTestCard1(){
+
+        return new Card("123",
+                "Lightning Bolt",
+                "Instant",
+                "Deal 3 damage to any target.",
+                new Legalities(),
+                "{R}",
+                1,
+                "power",
+                "toughness",
+                null,
+                new Images());
+    }
+
+    public static Card getTestCard2(){
+        return new Card("321", "fire Bolt", "Instant", "Deal 3 damage to any target.",
+                new Legalities(), "{R}", 1, null, null, null, new Images());
+    }
+
+    public static DeckCard getTestDeckCard1(){
+        return new DeckCard(UUID.randomUUID(), getTestCard1(), 2, "comment 1");
     }
 }
