@@ -37,6 +37,7 @@ public class SearchActivity extends AppCompatActivity {
     private RequestQueue queue;
 
     private SearchCardAdapter adapter;
+    private TextInputEditText searchEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +45,34 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         cards = new ArrayList<>();
 
+        searchEditText = findViewById(R.id.searchEditText);
+        Button searchButton = findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchTerm = searchEditText.getText().toString();
+                if (!searchTerm.isEmpty()) {
+                    fetchData(searchTerm);
+                }
+            }
+        });
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         adapter = new SearchCardAdapter(cards);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        fetchData();
+        // Removed fetchData() call from here, as we will now call it when the search button is clicked.
     }
 
-    private void fetchData() {
+    private void fetchData(String searchTerm) {
         queue = Volley.newRequestQueue(this);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://api.scryfall.com/cards/search?q=demon", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://api.scryfall.com/cards/search?q=" + searchTerm, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    cards.get(0).setImages(new Images("https://picsum.photos/100/100", "https://picsum.photos/100/100", "https://picsum.photos/100/100", "https://picsum.photos/100/100"));
+                    // Removed setting image URLs manually here, assuming it's fetched from the API response.
 
                     JSONArray data = response.getJSONArray("data");
 
@@ -70,9 +83,9 @@ public class SearchActivity extends AppCompatActivity {
                         Card card = Card.parseFromJSON(cardJson);
                         cards.add(card);
                     }
-                    
+
                     adapter.notifyDataSetChanged();
-                } catch (Exception e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
