@@ -1,4 +1,7 @@
 package com.example.mtg_deck_builder.models;
+
+import org.json.JSONObject;
+
 public class Legalities {
     private String standard;
     private String future;
@@ -46,6 +49,35 @@ public class Legalities {
         this.oldschool = oldschool;
         this.premodern = premodern;
         this.predh = predh;
+    }
+
+    public static Legalities parseJson(JSONObject legalitiesJson) {
+        String standard = legalitiesJson.optString("standard");
+        String future = legalitiesJson.optString("future");
+        String historic = legalitiesJson.optString("historic");
+        String timeless = legalitiesJson.optString("timeless");
+        String gladiator = legalitiesJson.optString("gladiator");
+        String pioneer = legalitiesJson.optString("pioneer");
+        String explorer = legalitiesJson.optString("explorer");
+        String modern = legalitiesJson.optString("modern");
+        String legacy = legalitiesJson.optString("legacy");
+        String pauper = legalitiesJson.optString("pauper");
+        String vintage = legalitiesJson.optString("vintage");
+        String penny = legalitiesJson.optString("penny");
+        String commander = legalitiesJson.optString("commander");
+        String oathbreaker = legalitiesJson.optString("oathbreaker");
+        String standardbrawl = legalitiesJson.optString("standardbrawl");
+        String brawl = legalitiesJson.optString("brawl");
+        String alchemy = legalitiesJson.optString("alchemy");
+        String paupercommander = legalitiesJson.optString("paupercommander");
+        String duel = legalitiesJson.optString("duel");
+        String oldschool = legalitiesJson.optString("oldschool");
+        String premodern = legalitiesJson.optString("premodern");
+        String predh = legalitiesJson.optString("predh");
+
+        return new Legalities(standard, future, historic, timeless, gladiator, pioneer, explorer,
+                modern, legacy, pauper, vintage, penny, commander, oathbreaker, standardbrawl,
+                brawl, alchemy, paupercommander, duel, oldschool, premodern, predh);
     }
 
     public String getStandard() {
