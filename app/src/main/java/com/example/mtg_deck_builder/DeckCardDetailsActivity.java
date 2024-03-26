@@ -48,7 +48,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         edtAmount = findViewById(R.id.edtAmount);
         btnSave = findViewById(R.id.btnSave);
 
-        // Get DeckCard object from intent
+        // TODO: figure out how the card will actually be loaded in.
         deckCard = DeckCard.getTestDeckCard1();
 
         // Display card details
@@ -79,7 +79,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         txtCardOracleText.setText("Oracle Text: " + deckCard.getCard().getOracleText());
         txtCardManaCost.setText("ManaCost: " + deckCard.getCard().getManaCost());
         txtCardCmc.setText(String.valueOf("CMC: " + deckCard.getCard().getCmc()));
-        txtCardPower.setText("CardP ower: " + deckCard.getCard().getPower());
+        txtCardPower.setText("Card Power: " + deckCard.getCard().getPower());
         txtCardToughness.setText("Toughness: " + deckCard.getCard().getToughness());
         txtLegaties.setText(buildLegalities());
 
