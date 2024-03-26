@@ -15,9 +15,15 @@ import java.util.List;
 public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardViewHolder> {
 
     private List<Card> cards;
+    private OnItemClickListener listener;
 
-    public SearchCardAdapter(List<Card> cards) {
+    public interface OnItemClickListener {
+        void onItemClick(Card card);
+    }
+
+    public SearchCardAdapter(List<Card> cards, OnItemClickListener listener) {
         this.cards = cards;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,6 +37,12 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardViewHolder
     public void onBindViewHolder(@NonNull SearchCardViewHolder holder, int position) {
         Card card = cards.get(position);
         holder.bind(card);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(card);
+            }
+        });
     }
 
     @Override

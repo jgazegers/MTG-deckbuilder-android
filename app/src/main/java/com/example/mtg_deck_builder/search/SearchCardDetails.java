@@ -2,6 +2,7 @@ package com.example.mtg_deck_builder.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.mtg_deck_builder.R;
 import com.example.mtg_deck_builder.models.Card;
-import com.example.mtg_deck_builder.models.DeckCard;
 import com.squareup.picasso.Picasso;
 
 public class SearchCardDetails extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class SearchCardDetails extends AppCompatActivity {
     private TextView txtCardCmc;
     private TextView txtCardPower;
     private TextView txtCardToughness;
-    private TextView txtLegaties;
+    private TextView txtLegalities;
     private Button btnAddToDeck;
     private Card card;
     @Override
@@ -39,18 +39,18 @@ public class SearchCardDetails extends AppCompatActivity {
         txtCardCmc = findViewById(R.id.txtCardCmc);
         txtCardPower = findViewById(R.id.txtCardPower);
         txtCardToughness = findViewById(R.id.txtCardToughness);
-        txtLegaties = findViewById(R.id.txtLegaties);
+        txtLegalities = findViewById(R.id.txtLegalities);
         btnAddToDeck = findViewById(R.id.btnAddToDeck);
 
-        //TODO: make this so it gets the actual card
-        card = DeckCard.getTestCard1();
+        Intent intent = getIntent();
+        card = (Card) intent.getSerializableExtra("card");
 
         displayCardDetails();
 
         btnAddToDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: add going to the activity off adding cards to a deck
+                //TODO: add going to the activity of adding cards to a deck
             }
         });
     }
@@ -65,7 +65,7 @@ public class SearchCardDetails extends AppCompatActivity {
         txtCardCmc.setText(String.valueOf("CMC: " + card.getCmc()));
         txtCardPower.setText("Card Power: " + card.getPower());
         txtCardToughness.setText("Toughness: " + card.getToughness());
-        txtLegaties.setText(buildLegalities());
+        txtLegalities.setText(buildLegalities());
     }
 
     private String buildLegalities(){

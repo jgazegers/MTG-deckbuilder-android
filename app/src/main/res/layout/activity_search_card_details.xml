@@ -112,7 +112,7 @@
         android:layout_toEndOf="@id/card_image">
 
         <TextView
-            android:id="@+id/txtLegaties"
+            android:id="@+id/txtLegalities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="legalities"

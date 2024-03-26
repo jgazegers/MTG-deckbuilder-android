@@ -1,13 +1,10 @@
 package com.example.mtg_deck_builder.search;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,8 +17,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mtg_deck_builder.R;
 import com.example.mtg_deck_builder.models.Card;
-import com.example.mtg_deck_builder.models.Images;
-import com.example.mtg_deck_builder.models.Legalities;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
@@ -30,9 +25,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchCardAdapter.OnItemClickListener {
     private List<Card> cards;
     private RequestQueue queue;
 
@@ -58,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        adapter = new SearchCardAdapter(cards);
+        adapter = new SearchCardAdapter(cards, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -98,5 +92,13 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         queue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public void onItemClick(Card card) {
+        // Open SearchCardDetails activity with the details of the clicked card
+        Intent intent = new Intent(this, SearchCardDetails.class);
+        intent.putExtra("card", card); // Pass the clicked card to the details activity
+        startActivity(intent);
     }
 }

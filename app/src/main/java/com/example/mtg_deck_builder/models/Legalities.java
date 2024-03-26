@@ -2,7 +2,9 @@ package com.example.mtg_deck_builder.models;
 
 import org.json.JSONObject;
 
-public class Legalities {
+import java.io.Serializable;
+
+public class Legalities implements Serializable {
     private String standard;
     private String future;
     private String historic;

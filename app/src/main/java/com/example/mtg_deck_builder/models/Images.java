@@ -2,7 +2,9 @@ package com.example.mtg_deck_builder.models;
 
 import org.json.JSONObject;
 
-public class Images {
+import java.io.Serializable;
+
+public class Images implements Serializable {
     private String small;
     private String normal;
     private String large;
