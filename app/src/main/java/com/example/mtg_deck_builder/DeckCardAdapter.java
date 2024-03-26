@@ -1,6 +1,5 @@
 package com.example.mtg_deck_builder;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,31 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mtg_deck_builder.models.Card;
 import com.example.mtg_deck_builder.models.DeckCard;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class DeckCardAdapter extends RecyclerView.Adapter<DeckCardAdapter.DeckCardViewHolder> {
 
     private List<DeckCard> deckCardList;
+    private OnItemClickListener onItemClickListener;
 
-    public DeckCardAdapter(List<DeckCard> deckCardList) {
+    public DeckCardAdapter(List<DeckCard> deckCardList, OnItemClickListener onItemClickListener) {
         this.deckCardList = deckCardList;
+        this.onItemClickListener = onItemClickListener;
     }
 
-    public static class DeckCardViewHolder extends RecyclerView.ViewHolder {
-        //public ImageView cardImage;
-        public TextView cardName;
-        public TextView cardQuantity;
-        public TextView cardComment;
-
-        public DeckCardViewHolder(View itemView) {
-            super(itemView);
-            //cardImage = itemView.findViewById(R.id.card_image);
-            cardName = itemView.findViewById(R.id.card_name);
-            cardQuantity = itemView.findViewById(R.id.card_quantity);
-            cardComment = itemView.findViewById(R.id.card_comment);
-        }
-
+    public interface OnItemClickListener{
+        void onItemClick(DeckCard card);
     }
 
     @NonNull
@@ -51,14 +41,32 @@ public class DeckCardAdapter extends RecyclerView.Adapter<DeckCardAdapter.DeckCa
         DeckCard currentDeckCard = deckCardList.get(position);
         Card card = currentDeckCard.getCard();
 
-        //holder.cardImage.setImageResource(card.getImages().getSmall());
+        Picasso.get().load(card.getImages().getNormal()).into(holder.cardImage);
         holder.cardName.setText(card.getName());
         holder.cardQuantity.setText("Quantity: " + currentDeckCard.getAmount());
         holder.cardComment.setText(currentDeckCard.getComment());
+        holder.itemView.setOnClickListener(view -> {
+            onItemClickListener.onItemClick(currentDeckCard);
+        });
     }
 
     @Override
     public int getItemCount() {
         return deckCardList.size();
+    }
+
+    public static class DeckCardViewHolder extends RecyclerView.ViewHolder {
+        public ImageView cardImage;
+        public TextView cardName;
+        public TextView cardQuantity;
+        public TextView cardComment;
+
+        public DeckCardViewHolder(View itemView) {
+            super(itemView);
+            cardImage = itemView.findViewById(R.id.card_image);
+            cardName = itemView.findViewById(R.id.card_name);
+            cardQuantity = itemView.findViewById(R.id.card_quantity);
+            cardComment = itemView.findViewById(R.id.card_comment);
+        }
     }
 }

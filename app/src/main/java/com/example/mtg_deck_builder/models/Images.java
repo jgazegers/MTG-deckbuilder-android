@@ -5,6 +5,13 @@ public class Images {
     private String large;
     private String png;
 
+    public Images(String small, String normal, String large, String png) {
+        this.small = small;
+        this.normal = normal;
+        this.large = large;
+        this.png = png;
+    }
+
     public String getSmall() {
         return small;
     }

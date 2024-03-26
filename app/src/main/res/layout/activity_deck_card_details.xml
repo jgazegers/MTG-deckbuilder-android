@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".DeckCardDetailsActivity">
 
+    <ImageView
+        android:id="@+id/card_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
     <TextView
         android:id="@+id/txtCardName"
         android:layout_width="wrap_content"
@@ -13,7 +22,9 @@
         android:text="Card Name"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/card_image"/>
 
     <TextView
         android:id="@+id/txtCardTypeLine"
@@ -22,7 +33,8 @@
         android:layout_below="@id/txtCardName"
         android:text="Type Line"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 
     <TextView
         android:id="@+id/txtCardOracleText"
@@ -31,7 +43,8 @@
         android:layout_below="@id/txtCardTypeLine"
         android:text="Oracle Text"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 
     <TextView
         android:id="@+id/txtCardManaCost"
@@ -40,7 +53,8 @@
         android:layout_below="@id/txtCardOracleText"
         android:text="Mana Cost"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 
     <TextView
         android:id="@+id/txtCardCmc"
@@ -49,7 +63,8 @@
         android:layout_below="@id/txtCardManaCost"
         android:text="CMC"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 
     <TextView
         android:id="@+id/txtCardPower"
@@ -58,7 +73,8 @@
         android:layout_below="@id/txtCardCmc"
         android:text="Power"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 
     <TextView
         android:id="@+id/txtCardToughness"
@@ -67,33 +83,49 @@
         android:layout_below="@id/txtCardPower"
         android:text="Toughness"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 
     <TextView
-        android:id="@+id/txtDeckAmount"
+        android:id="@+id/txtCommentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardToughness"
-        android:text="Amount"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
+        android:text="Comment"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/txtCardToughness"/>
 
     <EditText
         android:id="@+id/edtComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtDeckAmount"
+        android:layout_below="@id/txtCommentTitle"
         android:hint="Comment"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <TextView
+        android:id="@+id/txtAmountTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/edtComment"
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:id="@+id/edtAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtComment"
+        android:layout_below="@id/txtAmountTitle"
         android:hint="Amount"
         android:inputType="number"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"/>
 
     <Button
         android:id="@+id/btnSave"
@@ -103,6 +135,33 @@
         android:text="Save"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/legalitiesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/card_image"
+        android:text="Legalities: "
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <ScrollView
+        android:layout_width="450dp"
+        android:layout_height="240dp"
+        android:layout_below="@id/legalitiesTitle"
+        android:layout_toEndOf="@id/card_image">
+
+        <TextView
+            android:id="@+id/txtLegaties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="legalities"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"/>
+
+    </ScrollView>
 
 
 </RelativeLayout>

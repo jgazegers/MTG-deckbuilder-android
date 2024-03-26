@@ -68,18 +68,17 @@ public class DeckCard {
                 "Lightning Bolt",
                 "Instant",
                 "Deal 3 damage to any target.",
-                new Legalities(),
+                new Legalities("legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal"),
                 "{R}",
                 1,
                 "power",
                 "toughness",
                 null,
-                new Images());
+                new Images("https://picsum.photos/30/70", "https://picsum.photos/300/700", "https://picsum.photos/600/1400", "https://picsum.photos/300/700"));
     }
-
     public static Card getTestCard2(){
         return new Card("321", "fire Bolt", "Instant", "Deal 3 damage to any target.",
-                new Legalities(), "{R}", 1, null, null, null, new Images());
+                new Legalities("legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal", "legal"), "{R}", 1, null, null, null, new Images("https://picsum.photos/30/70", "https://picsum.photos/300/700", "https://picsum.photos/600/1400", "https://picsum.photos/300/700"));
     }
 
     public static DeckCard getTestDeckCard1(){
