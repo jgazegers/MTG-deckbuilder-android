@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mtg_deck_builder.models.Card;
 import com.example.mtg_deck_builder.models.DeckCard;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -24,14 +25,14 @@ public class DeckCardAdapter extends RecyclerView.Adapter<DeckCardAdapter.DeckCa
     }
 
     public static class DeckCardViewHolder extends RecyclerView.ViewHolder {
-        //public ImageView cardImage;
+        public ImageView cardImage;
         public TextView cardName;
         public TextView cardQuantity;
         public TextView cardComment;
 
         public DeckCardViewHolder(View itemView) {
             super(itemView);
-            //cardImage = itemView.findViewById(R.id.card_image);
+            cardImage = itemView.findViewById(R.id.card_image);
             cardName = itemView.findViewById(R.id.card_name);
             cardQuantity = itemView.findViewById(R.id.card_quantity);
             cardComment = itemView.findViewById(R.id.card_comment);
@@ -51,7 +52,7 @@ public class DeckCardAdapter extends RecyclerView.Adapter<DeckCardAdapter.DeckCa
         DeckCard currentDeckCard = deckCardList.get(position);
         Card card = currentDeckCard.getCard();
 
-        //holder.cardImage.setImageResource(card.getImages().getSmall());
+        Picasso.get().load(card.getImages().getNormal()).into(holder.cardImage);
         holder.cardName.setText(card.getName());
         holder.cardQuantity.setText("Quantity: " + currentDeckCard.getAmount());
         holder.cardComment.setText(currentDeckCard.getComment());

@@ -74,12 +74,11 @@ public class DeckCard {
                 "power",
                 "toughness",
                 null,
-                new Images("https://placekitten.com/30/70", "https://placekitten.com/300/700", "https://placekitten.com/600/1400", "https://placekitten.com/300/700"));
+                new Images("https://picsum.photos/30/70", "https://picsum.photos/300/700", "https://picsum.photos/600/1400", "https://picsum.photos/300/700"));
     }
-
     public static Card getTestCard2(){
         return new Card("321", "fire Bolt", "Instant", "Deal 3 damage to any target.",
-                new Legalities(), "{R}", 1, null, null, null, new Images("https://placekitten.com/30/70", "https://placekitten.com/300/700", "https://placekitten.com/600/1400", "https://placekitten.com/300/700"));
+                new Legalities(), "{R}", 1, null, null, null, new Images("https://picsum.photos/30/70", "https://picsum.photos/300/700", "https://picsum.photos/600/1400", "https://picsum.photos/300/700"));
     }
 
     public static DeckCard getTestDeckCard1(){
