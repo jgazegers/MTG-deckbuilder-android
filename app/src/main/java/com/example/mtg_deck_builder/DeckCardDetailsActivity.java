@@ -112,7 +112,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         theLaw.append("Duel: ").append(deckCard.getCard().getLegalities().getDuel()).append("\n");
         theLaw.append("Old School: ").append(deckCard.getCard().getLegalities().getOldschool()).append("\n");
         theLaw.append("Premodern: ").append(deckCard.getCard().getLegalities().getPremodern()).append("\n");
-        theLaw.append("Predh: ").append(deckCard.getCard().getLegalities().getPredh()).append("\n");
+        theLaw.append("Predh: ").append(deckCard.getCard().getLegalities().getPredh());
 
         return theLaw.toString();
     }
