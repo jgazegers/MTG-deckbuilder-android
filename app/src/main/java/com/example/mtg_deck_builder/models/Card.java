@@ -1,5 +1,9 @@
 package com.example.mtg_deck_builder.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +34,33 @@ public class Card {
         this.toughness = toughness;
         this.colourIdentity = colourIdentity;
         this.images = images;
+    }
+
+    public static Card parseFromJSON(JSONObject cardJson) throws JSONException {
+        String id = cardJson.getString("id");
+        String name = cardJson.optString("name");
+        String typeLine = cardJson.optString("type_line");
+        String oracleText = cardJson.optString("oracle_text");
+        JSONObject legalitiesJson = cardJson.getJSONObject("legalities");
+        Legalities legalities = Legalities.parseJson(legalitiesJson);
+        String manaCost = cardJson.optString("mana_cost");
+        int cmc = cardJson.optInt("cmc");
+        String power = cardJson.optString("power");
+        String toughness = cardJson.optString("toughness");
+        JSONArray colorIdentityJson = cardJson.optJSONArray("color_identity");
+
+        List<String> colorIdentity = new ArrayList<>();
+
+        if (colorIdentityJson != null) {
+            for (int i = 0; i < colorIdentityJson.length(); i++) {
+                colorIdentity.add(colorIdentityJson.getString(i));
+            }
+        }
+
+        JSONObject imagesJson = cardJson.optJSONObject("image_uris");
+        Images images = Images.parseFromJSON(imagesJson);
+
+        return new Card(id, name, typeLine, oracleText, legalities, manaCost, cmc, power, toughness, colorIdentity, images);
     }
 
     public static List<Card> getTestData() {

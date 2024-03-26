@@ -16,17 +16,27 @@ import com.squareup.picasso.Picasso;
 public class SearchCardViewHolder extends RecyclerView.ViewHolder {
     private ImageView cardImage;
     private TextView name;
+    private TextView type;
+    private TextView power;
+    private TextView toughness;
 
 
     public SearchCardViewHolder(@NonNull View itemView) {
         super(itemView);
         cardImage = itemView.findViewById(R.id.card_image);
         name = itemView.findViewById(R.id.card_name);
+        type = itemView.findViewById(R.id.card_type);
+        power = itemView.findViewById(R.id.card_power);
+        toughness = itemView.findViewById(R.id.card_toughness);
     }
 
     public void bind(Card card) {
         Picasso.get().load(card.getImages().getNormal()).into(cardImage);
+        name.setText(card.getName());
+        type.setText("Type: " + card.getTypeLine());
+        power.setText("Power: " + card.getPower());
+        toughness.setText("Toughness: " + card.getToughness());
 
-        name.setText("something");
+
     }
 }

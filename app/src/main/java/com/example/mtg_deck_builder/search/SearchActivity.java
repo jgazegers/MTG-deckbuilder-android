@@ -20,6 +20,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mtg_deck_builder.R;
 import com.example.mtg_deck_builder.models.Card;
+import com.example.mtg_deck_builder.models.Images;
+import com.example.mtg_deck_builder.models.Legalities;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
@@ -28,17 +30,73 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class SearchActivity extends AppCompatActivity {
+    private List<Card> cards;
+    private RequestQueue queue;
+
+    private SearchCardAdapter adapter;
+    private TextInputEditText searchEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        cards = new ArrayList<>();
 
-        List<Card> testData = Card.getTestData();
+        searchEditText = findViewById(R.id.searchEditText);
+        Button searchButton = findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchTerm = searchEditText.getText().toString();
+                if (!searchTerm.isEmpty()) {
+                    fetchData(searchTerm);
+                }
+            }
+        });
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        SearchCardAdapter adapter = new SearchCardAdapter(testData);
+        adapter = new SearchCardAdapter(cards);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Removed fetchData() call from here, as we will now call it when the search button is clicked.
+    }
+
+    private void fetchData(String searchTerm) {
+        queue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://api.scryfall.com/cards/search?q=" + searchTerm, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    // Removed setting image URLs manually here, assuming it's fetched from the API response.
+
+                    JSONArray data = response.getJSONArray("data");
+
+                    cards.clear();
+
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject cardJson = data.getJSONObject(i);
+                        Card card = Card.parseFromJSON(cardJson);
+                        cards.add(card);
+                    }
+
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                cards.clear();
+                error.printStackTrace();
+            }
+        });
+
+        queue.add(jsonObjectRequest);
     }
 }
