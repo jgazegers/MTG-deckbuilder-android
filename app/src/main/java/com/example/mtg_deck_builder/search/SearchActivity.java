@@ -55,8 +55,6 @@ public class SearchActivity extends AppCompatActivity implements SearchCardAdapt
         adapter = new SearchCardAdapter(cards, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Removed fetchData() call from here, as we will now call it when the search button is clicked.
     }
 
     private void fetchData(String searchTerm) {

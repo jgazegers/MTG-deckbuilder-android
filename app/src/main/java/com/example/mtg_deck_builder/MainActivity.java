@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mtg_deck_builder.decks.DecksActivity;
 import com.example.mtg_deck_builder.search.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
