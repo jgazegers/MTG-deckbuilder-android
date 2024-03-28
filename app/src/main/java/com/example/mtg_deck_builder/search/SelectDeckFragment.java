@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +51,8 @@ public class SelectDeckFragment extends Fragment {
         listView = view.findViewById(R.id.listView);
 
         // Set up adapter
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, deckList);
+//        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, deckList);
+        adapter = new DeckAdapter(getContext(), deckList);
         listView.setAdapter(adapter);
 
         // Set item click listener
@@ -74,15 +76,35 @@ public class SelectDeckFragment extends Fragment {
         Deck.saveList(deckList, getContext());
     }
 
-    private class DeckAdapter extends ArrayAdapter<Deck> {
+    private static class DeckAdapter extends ArrayAdapter<Deck> {
+        private List<Deck> decks;
+
         public DeckAdapter(@NonNull Context context, List<Deck> decks) {
-            super(context, android.R.layout.simple_list_item_1);
+            super(context, 0, decks);
+            this.decks = decks;
         }
 
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            return super.getView(position, convertView, parent);
+            View view = convertView;
+            if (view == null) {
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            }
+
+            // Get the deck at the current position
+            Deck deck = decks.get(position);
+
+            // Set the name of the deck as the text for the list item
+            if (deck != null) {
+                TextView textView = view.findViewById(android.R.id.text1);
+                if (textView != null) {
+                    textView.setText(deck.getName());
+                }
+            }
+
+            return view;
         }
     }
 }
