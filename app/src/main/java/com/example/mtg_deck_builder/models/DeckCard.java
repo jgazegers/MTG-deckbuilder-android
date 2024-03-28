@@ -1,10 +1,11 @@
 package com.example.mtg_deck_builder.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class DeckCard {
+public class DeckCard implements Serializable {
     private UUID id;
     private Card card;
     private int amount;

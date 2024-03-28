@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mtg_deck_builder.R;
+import com.example.mtg_deck_builder.models.Card;
 import com.example.mtg_deck_builder.models.Deck;
 
 import java.util.ArrayList;
@@ -25,8 +26,10 @@ public class SelectDeckFragment extends Fragment {
 
 
     private ListView listView;
+    private EditText numberInput;
     private ArrayAdapter<Deck> adapter;
     private List<Deck> deckList;
+    private Card card;
 
     public SelectDeckFragment() {
         // Required empty public constructor
@@ -45,13 +48,16 @@ public class SelectDeckFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.card = (Card) getArguments().getSerializable("card");
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_select_deck, container, false);
 
         listView = view.findViewById(R.id.listView);
 
+        numberInput = view.findViewById(R.id.numberInput);
+
         // Set up adapter
-//        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, deckList);
         adapter = new DeckAdapter(getContext(), deckList);
         listView.setAdapter(adapter);
 
@@ -59,9 +65,17 @@ public class SelectDeckFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Handle item click, for example, show details of the selected deck
                 Deck selectedDeck = deckList.get(position);
-                // You can perform any action with the selected deck, such as displaying its details in another fragment or activity
+                if (selectedDeck == null) return;
+
+                String inputString = numberInput.getText().toString();
+                if (inputString.isEmpty()) return;
+
+                int inputInt = Integer.parseInt(inputString);
+
+                selectedDeck.addCard(card, inputInt);
+                Deck.saveList(deckList, getContext());
+
             }
         });
 

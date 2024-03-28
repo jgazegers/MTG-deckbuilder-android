@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mtg_deck_builder.models.Deck;
 import com.example.mtg_deck_builder.models.DeckCard;
 import com.example.mtg_deck_builder.search.SearchActivity;
 
@@ -23,8 +24,9 @@ public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck_view);
 
+        Deck deck = (Deck) getIntent().getSerializableExtra("deck");
         // Retrieve deck card data from Intent extras
-        deckCards = DeckCard.getTestData();
+        deckCards = deck.getCards();
 
         // Initialize RecyclerView
         recyclerView = findViewById(R.id.recycler_view);
