@@ -78,6 +78,7 @@ public class SearchActivity extends AppCompatActivity implements SearchCardAdapt
 
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
+                    cards.clear();
                     e.printStackTrace();
                 }
             }
@@ -85,6 +86,7 @@ public class SearchActivity extends AppCompatActivity implements SearchCardAdapt
             @Override
             public void onErrorResponse(VolleyError error) {
                 cards.clear();
+                adapter.notifyDataSetChanged();
                 error.printStackTrace();
             }
         });

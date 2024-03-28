@@ -32,6 +32,9 @@
             android:name=".search.SearchActivity"
             android:exported="false" />
         <activity
+            android:name=".search.AddCardToDeckActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

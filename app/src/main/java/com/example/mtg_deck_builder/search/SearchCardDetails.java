@@ -50,7 +50,9 @@ public class SearchCardDetails extends AppCompatActivity {
         btnAddToDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: add going to the activity of adding cards to a deck
+                Intent newIntent = new Intent(SearchCardDetails.this, AddCardToDeckActivity.class);
+                newIntent.putExtra("card", card);
+                startActivity(newIntent);
             }
         });
     }
