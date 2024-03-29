@@ -89,8 +89,6 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
                         for (int iCard = 0; iCard < deck.getCards().size(); iCard++){
                             DeckCard card = deck.getCards().get(iCard);
 
-                            System.out.println(card.getId());
-
                             if (card.getId().equals(deckCard.getId())) {
                                 decks.get(iDeck).getCards().set(iCard, deckCard);
                                 break;

@@ -15,6 +15,15 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/btnAddPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Photo"
+        android:onClick="selectImageSource"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/header_text"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -22,6 +31,6 @@
         android:padding="8dp"
         android:clipToPadding="false"
         android:scrollbars="vertical"
-        android:layout_below="@id/header_text"/>
+        android:layout_below="@id/btnAddPhoto"/>
 
 </RelativeLayout>

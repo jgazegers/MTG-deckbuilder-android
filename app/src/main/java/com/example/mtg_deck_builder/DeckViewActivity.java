@@ -1,8 +1,13 @@
 package com.example.mtg_deck_builder;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +20,7 @@ import com.example.mtg_deck_builder.search.SearchActivity;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,12 +28,13 @@ import java.util.UUID;
 
 public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapter.OnItemClickListener {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 5;
+    private static final int REQUEST_IMAGE_PICK = 6;
     private RecyclerView recyclerView;
     private TextView txtHeader;
     private DeckCardAdapter adapter;
     private List<DeckCard> deckCards;
     private List<Deck> decks;
-    private int deckIndex;
     private Deck deck;
 
     @Override
@@ -72,6 +79,9 @@ public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapt
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        System.out.println("request code: " + requestCode);
+
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             this.decks = (List<Deck>) data.getSerializableExtra("decks");
 
@@ -85,8 +95,24 @@ public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapt
 
             adapter.notifyDataSetChanged(); // Update RecyclerView with new data
         }
-    }
+        else{
+            if (resultCode == RESULT_OK) {
+                if (data != null) {
+                    // Handle image pick from gallery
+                    Uri selectedImageUri = data.getData();
 
+                    for(int i = 0; i < decks.size(); i++){
+                        if(decks.get(i).getId().equals(deck.getId())){
+                            decks.get(i).setImage(selectedImageUri);
+                        }
+                    }
+
+                    Deck.saveList(decks, getBaseContext());
+
+                }
+            }
+        }
+    }
 
     @Override
     public void onItemClick(DeckCard card) {
@@ -96,5 +122,21 @@ public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapt
         startActivityForResult(intent, 1);
     }
 
+    public void selectImageSource(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent pickImageIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickImageIntent.setType("image/*");
+
+        // Check if there is a camera app available to handle the capture intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Show options to the user to select either camera or gallery
+            Intent chooserIntent = Intent.createChooser(pickImageIntent, "Select Image Source");
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { takePictureIntent });
+            startActivityForResult(chooserIntent, REQUEST_IMAGE_CAPTURE);
+        } else {
+            // Handle the case where there is no app available to handle the capture intent
+            startActivityForResult(pickImageIntent, REQUEST_IMAGE_PICK);
+        }
+    }
 
 }
