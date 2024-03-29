@@ -27,7 +27,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
     private TextView txtCardCmc;
     private TextView txtCardPower;
     private TextView txtCardToughness;
-    private TextView txtLegaties;
+    private TextView txtLegalities;
     private EditText edtComment;
     private EditText edtAmount;
     private Button btnSave;
@@ -49,7 +49,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         txtCardCmc = findViewById(R.id.txtCardCmc);
         txtCardPower = findViewById(R.id.txtCardPower);
         txtCardToughness = findViewById(R.id.txtCardToughness);
-        txtLegaties = findViewById(R.id.txtLegaties);
+        txtLegalities = findViewById(R.id.txtLegaties);
         edtComment = findViewById(R.id.edtComment);
         edtAmount = findViewById(R.id.edtAmount);
         btnSave = findViewById(R.id.btnSave);
@@ -115,7 +115,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         txtCardCmc.setText(String.valueOf("CMC: " + deckCard.getCard().getCmc()));
         txtCardPower.setText("Card Power: " + deckCard.getCard().getPower());
         txtCardToughness.setText("Toughness: " + deckCard.getCard().getToughness());
-        txtLegaties.setText(buildLegalities());
+        txtLegalities.setText(buildLegalities());
 
         // Display deck card details
         edtComment.setText(deckCard.getComment());
