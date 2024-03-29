@@ -1,8 +1,10 @@
 package com.example.mtg_deck_builder.search;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 public class SearchCardDetails extends AppCompatActivity {
 
+    private boolean showImages;
     private ImageView cardImage;
     private TextView txtCardName;
     private TextView txtCardTypeLine;
@@ -29,9 +32,15 @@ public class SearchCardDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        this.showImages = preferences.getBoolean("showImages", true);
+
         setContentView(R.layout.activity_search_card_details);
 
         cardImage = findViewById(R.id.card_image);
+        if (!this.showImages) cardImage.setVisibility(View.INVISIBLE);
+
         txtCardName = findViewById(R.id.txtCardName);
         txtCardTypeLine = findViewById(R.id.txtCardTypeLine);
         txtCardOracleText = findViewById(R.id.txtCardOracleText);
@@ -59,7 +68,9 @@ public class SearchCardDetails extends AppCompatActivity {
 
     private void displayCardDetails() {
         // Display card details
-        Picasso.get().load(card.getImages().getNormal()).into(cardImage);
+        if (this.showImages) {
+            Picasso.get().load(card.getImages().getNormal()).into(cardImage);
+        }
         txtCardName.setText(card.getName());
         txtCardTypeLine.setText("Type: " + card.getTypeLine());
         txtCardOracleText.setText("Oracle Text: " + card.getOracleText());

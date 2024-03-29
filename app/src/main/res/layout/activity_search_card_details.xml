@@ -1,126 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3"
     tools:context=".DeckCardDetailsActivity">
 
-    <ImageView
-        android:id="@+id/card_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/txtCardName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Card Name"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_below="@id/card_image"/>
+        <ImageView
+            android:id="@+id/card_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/txtCardTypeLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardName"
-        android:text="Type Line"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtCardOracleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardTypeLine"
-        android:text="Oracle Text"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <TextView
+                android:id="@+id/legalitiesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Legalities: "
+                android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/txtCardManaCost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardOracleText"
-        android:text="Mana Cost"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <ScrollView
+                android:layout_width="450dp"
+                android:layout_height="240dp">
 
-    <TextView
-        android:id="@+id/txtCardCmc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardManaCost"
-        android:text="CMC"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+                <TextView
+                    android:id="@+id/txtLegalities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="legalities"
+                    android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/txtCardPower"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardCmc"
-        android:text="Power"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            </ScrollView>
 
-    <TextView
-        android:id="@+id/txtCardToughness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardPower"
-        android:text="Toughness"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btnAddToDeck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCardToughness"
-        android:text="Add To Deck"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/legalitiesTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/card_image"
-        android:text="Legalities: "
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
-
-    <ScrollView
-        android:layout_width="450dp"
-        android:layout_height="240dp"
-        android:layout_below="@id/legalitiesTitle"
-        android:layout_toEndOf="@id/card_image">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtLegalities"
+            android:id="@+id/txtCardName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="legalities"
-            android:textSize="16sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Card Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCardTypeLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"/>
+            android:text="Type Line"
+            android:textSize="16sp" />
 
-    </ScrollView>
+        <TextView
+            android:id="@+id/txtCardOracleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Oracle Text"
+            android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/txtCardManaCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Mana Cost"
+            android:textSize="16sp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtCardCmc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="CMC"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtCardPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Power"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtCardToughness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Toughness"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnAddToDeck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Add To Deck" />
+
+    </LinearLayout>
+
+</LinearLayout>

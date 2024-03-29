@@ -1,5 +1,6 @@
 package com.example.mtg_deck_builder;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,12 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.mtg_deck_builder.models.DeckCard;
 import com.squareup.picasso.Picasso;
 
 public class DeckCardDetailsActivity extends AppCompatActivity {
 
+    private boolean showImages;
     private ImageView cardImage;
     private TextView txtCardName;
     private TextView txtCardTypeLine;
@@ -22,7 +25,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
     private TextView txtCardCmc;
     private TextView txtCardPower;
     private TextView txtCardToughness;
-    private TextView txtLegaties;
+    private TextView txtLegalities;
     private EditText edtComment;
     private EditText edtAmount;
     private Button btnSave;
@@ -34,8 +37,13 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck_card_details);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        this.showImages = preferences.getBoolean("showImages", true);
+
         // Initialize views
         cardImage = findViewById(R.id.card_image);
+        if (showImages) cardImage.setVisibility(View.INVISIBLE);
+
         txtCardName = findViewById(R.id.txtCardName);
         txtCardTypeLine = findViewById(R.id.txtCardTypeLine);
         txtCardOracleText = findViewById(R.id.txtCardOracleText);
@@ -43,7 +51,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         txtCardCmc = findViewById(R.id.txtCardCmc);
         txtCardPower = findViewById(R.id.txtCardPower);
         txtCardToughness = findViewById(R.id.txtCardToughness);
-        txtLegaties = findViewById(R.id.txtLegaties);
+        txtLegalities = findViewById(R.id.txtLegalities);
         edtComment = findViewById(R.id.edtComment);
         edtAmount = findViewById(R.id.edtAmount);
         btnSave = findViewById(R.id.btnSave);
@@ -73,7 +81,9 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
 
     private void displayDeckCardDetails() {
         // Display card details
-        Picasso.get().load(deckCard.getCard().getImages().getNormal()).into(cardImage);
+        if (showImages) {
+            Picasso.get().load(deckCard.getCard().getImages().getNormal()).into(cardImage);
+        }
         txtCardName.setText(deckCard.getCard().getName());
         txtCardTypeLine.setText("Type: " + deckCard.getCard().getTypeLine());
         txtCardOracleText.setText("Oracle Text: " + deckCard.getCard().getOracleText());
@@ -81,7 +91,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         txtCardCmc.setText(String.valueOf("CMC: " + deckCard.getCard().getCmc()));
         txtCardPower.setText("Card Power: " + deckCard.getCard().getPower());
         txtCardToughness.setText("Toughness: " + deckCard.getCard().getToughness());
-        txtLegaties.setText(buildLegalities());
+        txtLegalities.setText(buildLegalities());
 
         // Display deck card details
         edtComment.setText(deckCard.getComment());
