@@ -6,20 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:layout_centerInParent="true" />
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Search" />
 
-        <Button
-            android:id="@+id/btnDecks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Decks"
-            android:layout_below="@id/btnSearch"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/btnDecks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSearch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Decks" />
+
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnDecks"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Settings" />
 
 </RelativeLayout>
