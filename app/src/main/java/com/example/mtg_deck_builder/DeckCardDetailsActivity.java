@@ -49,7 +49,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         txtCardCmc = findViewById(R.id.txtCardCmc);
         txtCardPower = findViewById(R.id.txtCardPower);
         txtCardToughness = findViewById(R.id.txtCardToughness);
-        txtLegalities = findViewById(R.id.txtLegaties);
+        txtLegalities = findViewById(R.id.txtLegalities);
         edtComment = findViewById(R.id.edtComment);
         edtAmount = findViewById(R.id.edtAmount);
         btnSave = findViewById(R.id.btnSave);

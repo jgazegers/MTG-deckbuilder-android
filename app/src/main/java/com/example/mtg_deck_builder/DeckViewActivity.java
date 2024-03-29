@@ -2,6 +2,7 @@ package com.example.mtg_deck_builder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import com.example.mtg_deck_builder.models.Deck;
 import com.example.mtg_deck_builder.models.DeckCard;
 import com.example.mtg_deck_builder.search.SearchActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +23,7 @@ import java.util.UUID;
 public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
+    private TextView txtHeader;
     private DeckCardAdapter adapter;
     private List<DeckCard> deckCards;
     private List<Deck> decks;
@@ -40,6 +44,9 @@ public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapt
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        txtHeader = findViewById(R.id.header_text);
+        txtHeader.setText(deck.getName());
 
         // Create and set adapter
         adapter = new DeckCardAdapter(deckCards, this);
