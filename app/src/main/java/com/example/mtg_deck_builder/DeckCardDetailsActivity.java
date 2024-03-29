@@ -1,5 +1,6 @@
 package com.example.mtg_deck_builder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mtg_deck_builder.models.Deck;
 import com.example.mtg_deck_builder.models.DeckCard;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeckCardDetailsActivity extends AppCompatActivity {
 
@@ -26,7 +31,8 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
     private EditText edtComment;
     private EditText edtAmount;
     private Button btnSave;
-
+    private List<Deck> decks;
+    private Deck currentDeck;
     private DeckCard deckCard;
 
     @Override
@@ -48,8 +54,11 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         edtAmount = findViewById(R.id.edtAmount);
         btnSave = findViewById(R.id.btnSave);
 
-        // TODO: figure out how the card will actually be loaded in.
-        deckCard = DeckCard.getTestDeckCard1();
+        Intent intent = getIntent();
+
+        decks = Deck.getListFromUserDefaults(this);
+        currentDeck = (Deck) getIntent().getSerializableExtra("currentDeck");
+        deckCard = (DeckCard) getIntent().getSerializableExtra("currentCard");
 
         // Display card details
         displayDeckCardDetails();
@@ -65,8 +74,33 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
                 deckCard.setComment(newComment);
                 deckCard.setAmount(newAmount);
 
+                for (int iDeck = 0; iDeck < decks.size(); iDeck++){
+                    Deck deck = decks.get(iDeck);
+
+                    if(deck.getId().equals(currentDeck.getId())){
+                        for (int iCard = 0; iCard < deck.getCards().size(); iCard++){
+                            DeckCard card = deck.getCards().get(iCard);
+
+                            System.out.println(card.getId());
+
+                            if (card.getId().equals(deckCard.getId())) {
+                                decks.get(iDeck).getCards().set(iCard, deckCard);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+
+                Deck.saveList(decks, getBaseContext());
+
                 // Update UI to reflect changes
                 displayDeckCardDetails();
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("decks", new ArrayList<>(decks));
+                setResult(RESULT_OK, resultIntent);
+                finish();
             }
         });
     }
