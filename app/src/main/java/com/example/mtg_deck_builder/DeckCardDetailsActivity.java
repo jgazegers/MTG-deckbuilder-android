@@ -48,7 +48,7 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
 
         // Initialize views
         cardImage = findViewById(R.id.card_image);
-        if (showImages) cardImage.setVisibility(View.INVISIBLE);
+        if (!showImages) cardImage.setVisibility(View.INVISIBLE);
 
         txtCardName = findViewById(R.id.txtCardName);
         txtCardTypeLine = findViewById(R.id.txtCardTypeLine);
