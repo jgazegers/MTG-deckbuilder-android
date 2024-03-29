@@ -43,7 +43,7 @@ public class DecksActivity extends AppCompatActivity implements DeckAdapter.OnIt
         recyclerViewDecks.setAdapter(adapter);
         recyclerViewDecks.setLayoutManager(new LinearLayoutManager(this));
 
-        checkPermission(Manifest.permission.READ_MEDIA_IMAGES, STORAGE_PERMISSION_CODE);
+        checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
     }
 
     @Override
