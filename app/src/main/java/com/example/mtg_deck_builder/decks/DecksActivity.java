@@ -60,9 +60,6 @@ public class DecksActivity extends AppCompatActivity implements DeckAdapter.OnIt
             // Requesting the permission
             ActivityCompat.requestPermissions(DecksActivity.this, new String[] { permission }, requestCode);
         }
-        else {
-            Toast.makeText(DecksActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
