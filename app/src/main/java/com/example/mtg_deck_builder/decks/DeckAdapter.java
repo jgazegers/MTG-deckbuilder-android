@@ -1,6 +1,8 @@
 package com.example.mtg_deck_builder.decks;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mtg_deck_builder.R;
 import com.example.mtg_deck_builder.models.Deck;
 import com.example.mtg_deck_builder.search.SearchCardViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,7 +52,23 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> {
                 listener.onItemClick(deck);
             }
         });
+
+
+        if (deck.getImage() != null) {
+            if(ContextCompat.checkSelfPermission(holder.itemView.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                holder.imageView.setImageURI(deck.getImage());
+                Picasso.get().load(deck.getImage()).into(holder.imageView);
+            }
+
+        } else {
+            // Placeholder or default image if no image is available
+            holder.imageView.setImageResource(R.drawable.ic_launcher_background);
+        }
     }
+
+
+
+
 
     @Override
     public int getItemCount() {

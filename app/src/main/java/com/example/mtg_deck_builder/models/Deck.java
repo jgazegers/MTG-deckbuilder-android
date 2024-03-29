@@ -1,6 +1,8 @@
 package com.example.mtg_deck_builder.models;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,12 +18,22 @@ public class Deck implements Serializable {
     private UUID id;
     private String name;
     private List<DeckCard> cards;
+    private String image;
 
     public Deck(String name) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.cards = new ArrayList<>();
     }
+
+    public Uri getImage(){
+        if(image != null) {
+            return Uri.parse(image);
+        }
+        else return null;
+    }
+
+    public void setImage(Uri image){ this.image = image.toString(); }
 
     public UUID getId() {
         return id;
