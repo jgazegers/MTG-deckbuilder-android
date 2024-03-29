@@ -1,6 +1,7 @@
 package com.example.mtg_deck_builder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.mtg_deck_builder.models.Deck;
 import com.example.mtg_deck_builder.models.DeckCard;
@@ -19,6 +21,7 @@ import java.util.List;
 
 public class DeckCardDetailsActivity extends AppCompatActivity {
 
+    private boolean showImages;
     private ImageView cardImage;
     private TextView txtCardName;
     private TextView txtCardTypeLine;
@@ -40,8 +43,13 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck_card_details);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        this.showImages = preferences.getBoolean("showImages", true);
+
         // Initialize views
         cardImage = findViewById(R.id.card_image);
+        if (showImages) cardImage.setVisibility(View.INVISIBLE);
+
         txtCardName = findViewById(R.id.txtCardName);
         txtCardTypeLine = findViewById(R.id.txtCardTypeLine);
         txtCardOracleText = findViewById(R.id.txtCardOracleText);
@@ -107,7 +115,9 @@ public class DeckCardDetailsActivity extends AppCompatActivity {
 
     private void displayDeckCardDetails() {
         // Display card details
-        Picasso.get().load(deckCard.getCard().getImages().getNormal()).into(cardImage);
+        if (showImages) {
+            Picasso.get().load(deckCard.getCard().getImages().getNormal()).into(cardImage);
+        }
         txtCardName.setText(deckCard.getCard().getName());
         txtCardTypeLine.setText("Type: " + deckCard.getCard().getTypeLine());
         txtCardOracleText.setText("Oracle Text: " + deckCard.getCard().getOracleText());

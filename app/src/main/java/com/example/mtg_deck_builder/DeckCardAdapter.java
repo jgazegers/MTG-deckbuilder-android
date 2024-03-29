@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mtg_deck_builder.models.Card;
@@ -41,7 +42,16 @@ public class DeckCardAdapter extends RecyclerView.Adapter<DeckCardAdapter.DeckCa
         DeckCard currentDeckCard = deckCardList.get(position);
         Card card = currentDeckCard.getCard();
 
-        Picasso.get().load(card.getImages().getNormal()).into(holder.cardImage);
+        boolean showImages = PreferenceManager.getDefaultSharedPreferences(holder.itemView.getContext())
+                .getBoolean("showImages", true);
+
+        if (showImages) {
+            Picasso.get().load(card.getImages().getNormal()).into(holder.cardImage);
+        } else {
+            holder.cardImage.setVisibility(View.INVISIBLE);
+        }
+
+
         holder.cardName.setText(card.getName());
         holder.cardQuantity.setText("Quantity: " + currentDeckCard.getAmount());
         holder.cardComment.setText(currentDeckCard.getComment());
