@@ -20,6 +20,7 @@ import com.example.mtg_deck_builder.search.SearchActivity;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,12 +101,24 @@ public class DeckViewActivity extends AppCompatActivity implements DeckCardAdapt
                 if (data != null) {
                     // Handle image pick from gallery
                     Uri selectedImageUri = data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "File", null);
+                        Uri newUri = Uri.parse(path);
 
-                    for(int i = 0; i < decks.size(); i++){
-                        if(decks.get(i).getId().equals(deck.getId())){
-                            decks.get(i).setImage(selectedImageUri);
+                        for(int i = 0; i < decks.size(); i++){
+                            if(decks.get(i).getId().equals(deck.getId())){
+                                decks.get(i).setImage(newUri);
+                            }
                         }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
+
+
+
 
                     Deck.saveList(decks, getBaseContext());
 

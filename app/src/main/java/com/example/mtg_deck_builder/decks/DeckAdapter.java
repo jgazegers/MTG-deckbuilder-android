@@ -55,7 +55,7 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckViewHolder> {
 
 
         if (deck.getImage() != null) {
-            if(ContextCompat.checkSelfPermission(holder.itemView.getContext(), Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
+            if(ContextCompat.checkSelfPermission(holder.itemView.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 holder.imageView.setImageURI(deck.getImage());
                 Picasso.get().load(deck.getImage()).into(holder.imageView);
             }
