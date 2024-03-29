@@ -21,13 +21,14 @@ import java.util.List;
 public class DecksActivity extends AppCompatActivity implements DeckAdapter.OnItemClickListener {
 
     private RecyclerView recyclerViewDecks;
+    private List<Deck> decks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decks);
 
-        List<Deck> decks = Deck.getListFromUserDefaults(this);
+        decks = Deck.getListFromUserDefaults(this);
 
         recyclerViewDecks = findViewById(R.id.decks_list);
         DeckAdapter adapter = new DeckAdapter(decks, this);

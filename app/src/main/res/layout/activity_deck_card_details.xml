@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DeckCardDetailsActivity">
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".DeckCardDetailsActivity">
 
     <ImageView
         android:id="@+id/card_image"
@@ -146,14 +150,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"/>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="450dp"
         android:layout_height="240dp"
         android:layout_below="@id/legalitiesTitle"
         android:layout_toEndOf="@id/card_image">
 
         <TextView
-            android:id="@+id/txtLegaties"
+            android:id="@+id/txtLegalities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="legalities"
@@ -161,7 +165,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"/>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
 
 
-</RelativeLayout>
+</ScrollView>
